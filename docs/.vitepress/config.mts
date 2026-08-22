@@ -21,6 +21,7 @@ export default defineConfig({
         text: 'Docs',
         items: [
           { text: 'What it is', link: '/' },
+          { text: 'Quick start', link: '/quick-start' },
           { text: 'Architecture', link: '/architecture' },
           { text: 'Self-host a node', link: '/self-host' },
           { text: 'Write & publish', link: '/publish' },
