@@ -26,13 +26,6 @@ export default defineConfig({
           { text: 'Write & publish', link: '/publish' },
         ],
       },
-      {
-        text: 'Reference',
-        items: [
-          { text: 'Symbol', link: '/symbol' },
-          { text: 'STS SDK', link: '/sts-sdk' },
-        ],
-      },
     ],
     search: {
       provider: 'local',
