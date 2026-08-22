@@ -15,5 +15,7 @@ The node is **single-tenant**. First visit claims the instance — that person i
 | [Architecture](/architecture) | Planes (STS, TD, MD, SYM, Paper, API+UI), Redis isolation, sessions and leases |
 | [Self-host a node](/self-host) | Docker + Python 3.12, `node-init` through first `connect` |
 | [Write & publish](/publish) | `Strategy`, `init` / `check` / `run`, private registry vs peer publish |
+| [Symbol](/symbol) | SYM plane, Control Symbol page, universal tickers, `self.symbols` |
+| [STS SDK](/sts-sdk) | Hooks, accessors, deploy document, import rules |
 
 Product source: [lynxlinkage/mftik](https://github.com/lynxlinkage/mftik). Marketing and hosted options: [mftik.com](https://mftik.com).
