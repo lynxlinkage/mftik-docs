@@ -13,7 +13,7 @@ class MyStrategy(Strategy):
         # self.oms / self.ledger / self.tape / self.mds / self.symbols / self.timer
 ```
 
-Instruments are **universal tickers**: `Venue_Category_SYMBOL` — e.g. `Gate_Spot_BTCUSDT`, `BinanceFuture_Perp_BTCUSDT`, `Paper_Spot_…`. Tick / step / min notional live on the [Symbol](/symbol) plane; the full hook and accessor surface is on [STS SDK](/sts-sdk).
+Instruments are **universal tickers**: `Venue_Category_SYMBOL` — e.g. `Gate_Spot_BTCUSDT`, `BinanceFuture_Perp_BTCUSDT`, `Paper_Spot_…`.
 
 ## Init, check, run
 
