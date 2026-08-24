@@ -13,6 +13,7 @@ The node is **single-tenant**. First visit claims the instance — that person i
 | Page | When |
 |---|---|
 | [Quick start](/quick-start) | Clean machine → running session (`node-init` through `run`) |
+| [CLI](/cli) | Commands on the laptop that writes strategies |
 | [Architecture](/architecture) | Planes (STS, TD, MD, SYM, Paper, API+UI), Redis isolation, sessions and leases |
 | [Self-host a node](/self-host) | Docker + Python 3.12, `node-init` through first `connect` |
 | [Write & publish](/publish) | `Strategy`, `init` / `check` / `run`, private registry vs peer publish |

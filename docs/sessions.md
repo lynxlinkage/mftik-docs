@@ -32,4 +32,4 @@ The [tape](/architecture#sessions-leases-tape) survives a restart; that story is
 
 ## Next
 
-Planes and Redis isolation: [Architecture](/architecture). From a clean machine: [Quick start](/quick-start). Authoring: [Write & publish](/publish).
+Laptop commands: [CLI](/cli). Planes and Redis isolation: [Architecture](/architecture). From a clean machine: [Quick start](/quick-start). Authoring: [Write & publish](/publish).
