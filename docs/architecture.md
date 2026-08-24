@@ -31,7 +31,7 @@ flowchart LR
 
 ## Sessions, leases, tape
 
-**Sessions** are the unit of work. Deploy from the STS page or `mftik run`. Live / Attention / History keep rows you must stop or ack out of last month's noise. A failed session keeps its reason until an operator acks it.
+**Sessions** are the unit of work. Deploy from the STS page or `mftik run`. Live / Attention / History keep rows you must stop or ack out of last month's noise. A failed session keeps its reason until an operator acks it. Operator detail: [Sessions](/sessions).
 
 **Leases** fence the dangerous verbs. Only the process that holds the attach may place an order. Heartbeats expire; a ghost session does not keep trading.
 
