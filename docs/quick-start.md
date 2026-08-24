@@ -11,12 +11,12 @@ pip install mftik
 mftik node-init ./mynode
 cd mynode
 docker compose pull
-docker compose run --rm migrate
-docker compose run --rm seed
 docker compose up -d
 ```
 
 `node-init` writes compose, a Caddyfile, and a `.env` (mode `0600`, with a generated database password). Postgres, Redis, and the edge are part of the stack — you do not have to bring them.
+
+`up` waits for `migrate` (`alembic upgrade head`, idempotent) and `seed` (Owner row + two paper accounts, also idempotent) before the planes start. A later `pull` + `up` applies new revisions the same way.
 
 Open the URL Caddy is bound to (default `http://localhost:8080`). **First visit claims the instance** — that person is the Owner. Prove identity with a password, Discord, or Google.
 
