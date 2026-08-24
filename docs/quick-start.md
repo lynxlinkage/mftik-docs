@@ -51,4 +51,4 @@ Import rules (stdlib, `mftik`, your tree, declared extras) are on [Write & publi
 
 ## Next
 
-More host detail: [Self-host a node](/self-host) or [Architecture](/architecture). Strategy authoring: [Write & publish](/publish).
+Laptop commands: [CLI](/cli). More host detail: [Self-host a node](/self-host) or [Architecture](/architecture). Strategy authoring: [Write & publish](/publish).

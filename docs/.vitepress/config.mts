@@ -22,6 +22,7 @@ export default defineConfig({
         items: [
           { text: 'What it is', link: '/' },
           { text: 'Quick start', link: '/quick-start' },
+          { text: 'CLI', link: '/cli' },
           { text: 'Architecture', link: '/architecture' },
           { text: 'Self-host a node', link: '/self-host' },
           { text: 'Write & publish', link: '/publish' },
