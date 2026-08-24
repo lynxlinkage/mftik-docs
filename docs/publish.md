@@ -1,6 +1,6 @@
 # Write & publish
 
-Subclass `Strategy`, override the hooks you care about, trade through the accessors the base class binds.
+Subclass `Strategy`, override the hooks you care about, trade through the accessors the base class binds. Live feed topics and private events: [Hooks](/hooks).
 
 ```python
 from mftik.strategy import Strategy
