@@ -9,13 +9,17 @@ Process and session state. Called in order around a run.
 | Hook / method | What it is |
 |---|---|
 | `on_initialized(cls, params)` | Classmethod. Deserialize `strategy.yml` `sts.config` into runtime paras. Called once before the session starts. |
+| `on_rebuild(remembered)` | Prior run restored. Before `on_start` / `on_ready`. Restore from recon + `remembered`, not a saved copy of your attributes. |
 | `on_start` | Session starts strategy infrastructure |
 | `on_ready` | After start, session is ready to run |
 | `on_stop` | Session shutting down |
 | `exit(reason=...)` | Natural end → `on_stop` → status `done` |
 | `fail(reason)` | Same teardown, status `failed`, reason persisted for the UI |
+| `remember(key, value)` | Persist one fact a rebuild could not re-derive (config is in `st_paras`; venue state returns via recon). Write when it becomes true — a kill runs no shutdown. |
 
 `fail` does not unwind orders — cancel what must not outlive the session first.
+
+Set `rebuildable = True` on the class, or STS leaves the row interrupted. Operator side: [Rebuild on boot](/sessions#rebuild-on-boot). `cid_slot` is kept so `owns()` still recognises the session's orders. Facts are established once; re-remembering a moving value stores something wrong when read.
 
 ## Market data
 

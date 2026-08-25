@@ -17,7 +17,7 @@ The node is **single-tenant**. First visit claims the instance — that person i
 | [Architecture](/architecture) | Planes (STS, TD, MD, SYM, Paper, API+UI), Redis isolation, sessions and leases |
 | [Self-host a node](/self-host) | Docker + Python 3.12, `node-init` through first `connect` |
 | [Write & publish](/publish) | `Strategy`, `init` / `check` / `run`, private registry vs peer publish |
-| [Hooks](/hooks) | Lifecycle, market data (feeds + queries), private TD events |
+| [Hooks](/hooks) | Lifecycle (incl. rebuild / remember), market data (feeds + queries), private TD events |
 | [Sessions](/sessions) | The unit of work in Control — Live / Attention / History, stop vs tail, leases, rebuild, logs |
 
 Product source: [lynxlinkage/mftik](https://github.com/lynxlinkage/mftik). Marketing and hosted options: [mftik.com](https://mftik.com).
