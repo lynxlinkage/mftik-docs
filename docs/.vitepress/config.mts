@@ -27,6 +27,7 @@ export default defineConfig({
           { text: 'Self-host a node', link: '/self-host' },
           { text: 'Write & publish', link: '/publish' },
           { text: 'Hooks', link: '/hooks' },
+          { text: 'Exchanges', link: '/exchanges' },
           { text: 'Sessions', link: '/sessions' },
         ],
       },
