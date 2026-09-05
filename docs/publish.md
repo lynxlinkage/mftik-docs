@@ -13,7 +13,7 @@ class MyStrategy(Strategy):
         # self.oms / self.ledger / self.tape / self.mds / self.symbols / self.timer
 ```
 
-Instruments are **universal tickers**: `Venue_Category_SYMBOL` — e.g. `Gate_Spot_BTCUSDT`, `BinanceFuture_Perp_BTCUSDT`, `Paper_Spot_…`.
+Instruments are **universal tickers**: `Venue_Category_SYMBOL` — e.g. `Gate_Spot_BTCUSDT`, `BinanceUM_Perp_BTCUSDT`, `Paper_Spot_…`. Canonical venue names: [Exchanges](/exchanges).
 
 ## Init, check, run
 

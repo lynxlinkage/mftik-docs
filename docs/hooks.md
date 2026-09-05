@@ -1,6 +1,6 @@
 # Hooks
 
-Subclass `Strategy`, override the hooks you care about. Universal tickers are `Venue_Category_SYMBOL` — see [Write & publish](/publish).
+Subclass `Strategy`, override the hooks you care about. Universal tickers are `Venue_Category_SYMBOL` — see [Write & publish](/publish). Which venues exist, and which feeds they serve: [Exchanges](/exchanges).
 
 ## Lifecycle
 
@@ -38,20 +38,26 @@ Subscribe in the deploy document (`md:`), one topic per instrument.
 | `on_kline` | `kline_{interval}` | In-progress candle re-pushed; only `closed` is final |
 | `on_ticker` | `ticker` | 24h stats + top of book |
 | `on_liquidation` | `liquidation` | Other accounts closed out — not your fill |
+| `on_funding_rate` | `funding_rate` | Still-moving prediction for the next settlement; positive = longs pay shorts |
+| `on_open_interest` | `open_interest` | One side's size. Linear books in base; BinanceCM in contracts |
 
-A subscribe the venue does not serve is refused at attach. Gate has no `aggtrade`; paper has no candles; Bybit liquidations are perp.
+A subscribe the venue does not serve is refused at attach (no `stream_*`, or the method refuses that category). Gate has no `aggtrade`; paper has no candles; Bybit liquidations are perp. `funding_rate` and `open_interest` are contract books — spot and paper refuse. Binance futures have no OI stream (use `mds.fetch_open_interest`). Per-venue list: [Exchanges](/exchanges).
 
 ### Queries
 
-`self.mds.fetch_klines` / `fetch_order_book` / `fetch_best_quote` return a `query_id` (or `None` if it never left). Answers arrive later:
+`self.mds.fetch_klines` / `fetch_order_book` / `fetch_best_quote` / `fetch_funding_history` / `fetch_open_interest` return a `query_id` (or `None` if it never left). Answers arrive later:
 
 | Hook | Notes |
 |---|---|
 | `on_fetch_klines` | Not the same as `on_kline` |
 | `on_fetch_orderbook` | Not the same as `on_order_book` |
 | `on_fetch_bestquote` | Not the same as `on_best_quote` |
+| `on_fetch_funding_history` | Not the same as `on_funding_rate`. Settled rows, oldest first |
+| `on_fetch_open_interest` | Not the same as `on_open_interest`. Snapshot of *now*, not a series |
 
 They also fire on failure (`ok` False). Independent of `md_ids`. Interval is canonical (`1m`, `4h`, `1mo` — month is `1mo`, never `1M`).
+
+A venue that has no history or snapshot for that instrument (spot, paper, dated `Future` for funding) answers `MD_VENUE_UNSUPPORTED_READ`. Paper has no fetch reader at all — the query never leaves.
 
 ## Private
 
@@ -71,4 +77,4 @@ submit → `on_order_update` \| `on_order_reject`; cancel → `on_order_update` 
 
 ## Next
 
-Tape warm-up and accessors (`oms`, `ledger`, `tape`, `mds`, `symbols`, `timer`, `log`): [Architecture](/architecture#sessions-leases-tape), [Write & publish](/publish).
+Which venues exist and which feeds they serve: [Exchanges](/exchanges). Tape warm-up and accessors (`oms`, `ledger`, `tape`, `mds`, `symbols`, `timer`, `log`): [Architecture](/architecture#sessions-leases-tape), [Write & publish](/publish).
