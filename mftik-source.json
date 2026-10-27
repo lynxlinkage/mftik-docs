@@ -1,0 +1,48 @@
+{
+  "repo": "lynxlinkage/mftik",
+  "version": "v1.0.0",
+  "commit": "8af69f5ec99a5277c8542e8aac5e0d4799b906c0",
+  "mftiko": "https://github.com/BullionBear/mftiko",
+  "pages": [
+    "install",
+    "lifecycle",
+    "context",
+    "threads",
+    "volume",
+    "pack",
+    "session",
+    "errors",
+    "runtime",
+    "examples",
+    "reference"
+  ],
+  "sidebar": [
+    {
+      "text": "Getting Started",
+      "items": [
+        { "text": "Install and run", "link": "/install" },
+        { "text": "First strategy", "link": "/examples#md-watch" }
+      ]
+    },
+    {
+      "text": "Guides",
+      "items": [
+        { "text": "Lifecycle", "link": "/lifecycle" },
+        { "text": "Context", "link": "/context" },
+        { "text": "Threads", "link": "/threads" },
+        { "text": "Volume and inputs", "link": "/volume" },
+        { "text": "Pack and deploy", "link": "/pack" },
+        { "text": "Session spec", "link": "/session" },
+        { "text": "Errors and exit codes", "link": "/errors" },
+        { "text": "Runtime notes", "link": "/runtime" },
+        { "text": "Examples", "link": "/examples" }
+      ]
+    },
+    {
+      "text": "API Reference",
+      "items": [
+        { "text": "API reference", "link": "/reference" }
+      ]
+    }
+  ]
+}

@@ -1,24 +1,30 @@
-# MFTIK
+---
+description: v1.0.0 Python STS SDK for mftiko
+---
 
-A self-hosted **trading desk** (TradeOps) you keep running — not a backtester that prints a chart, and not a library that leaves you to invent the night shift.
+# mftik
 
-You host a **node**. You write strategies in Python against the live book, the tape, and the accounts you attach. The node keeps processes up and gives an operator a place to live with the runs: deploy, watch, stop, ack a failure, pull the log.
+mftik is the Python STS SDK for [mftiko](https://github.com/BullionBear/mftiko).
 
-## One node, one Owner
+These pages are the v1.0.0 guide and API reference. A session worker is a process started with `python -m mftik.run module:Class`.
 
-The node is **single-tenant**. First visit claims the instance — that person is the Owner. Auth is password, Discord, or Google, plus machine keys for scripts and peer nodes. Nobody else gets a user row.
+## Getting Started
 
-## What to read next
+- [Install and run](/install)
+- [First strategy](/examples#md-watch)
 
-| Page | When |
-|---|---|
-| [Quick start](/quick-start) | Clean machine → running session (`node-init` through `run`) |
-| [CLI](/cli) | Commands on the laptop that writes strategies |
-| [Architecture](/architecture) | Planes (STS, TD, MD, SYM, Paper, API+UI), Redis isolation, sessions and leases |
-| [Self-host a node](/self-host) | Docker + Python 3.12, `node-init` through first `connect` |
-| [Write & publish](/publish) | `Strategy`, `init` / `check` / `run`, private registry vs peer publish |
-| [Hooks](/hooks) | Lifecycle (incl. rebuild / remember), market data (feeds + queries), private TD events |
-| [Exchanges](/exchanges) | Canonical venues, categories, credentials, and which MD topics each serves |
-| [Sessions](/sessions) | The unit of work in Control — Live / Attention / History, stop vs tail, leases, rebuild, logs |
+## Guides
 
-Product source: [lynxlinkage/mftik](https://github.com/lynxlinkage/mftik). Marketing and hosted options: [mftik.com](https://mftik.com).
+- [Lifecycle](/lifecycle)
+- [Context](/context)
+- [Threads](/threads)
+- [Volume and inputs](/volume)
+- [Pack and deploy](/pack)
+- [Session spec](/session)
+- [Errors and exit codes](/errors)
+- [Runtime notes](/runtime)
+- [Examples](/examples)
+
+## API Reference
+
+- [API reference](/reference)

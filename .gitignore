@@ -3,3 +3,17 @@ docs/.vitepress/dist/
 docs/.vitepress/cache/
 .DS_Store
 *.log
+
+# Fetched from lynxlinkage/mftik docs/python at build time.
+/docs/install.md
+/docs/lifecycle.md
+/docs/context.md
+/docs/threads.md
+/docs/volume.md
+/docs/pack.md
+/docs/session.md
+/docs/errors.md
+/docs/runtime.md
+/docs/examples.md
+/docs/reference.md
+
