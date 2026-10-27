@@ -2,9 +2,10 @@ import assert from 'node:assert/strict'
 import test from 'node:test'
 import { rewriteMarkdown } from './rewrite-mftik-markdown.mjs'
 
+const ref = '8af69f5ec99a5277c8542e8aac5e0d4799b906c0'
 const options = {
   repo: 'lynxlinkage/mftik',
-  tag: 'v1.0.0',
+  ref,
   pages: ['lifecycle', 'examples'],
 }
 
@@ -18,11 +19,11 @@ test('keeps absolute http links', () => {
   assert.equal(rewriteMarkdown(input, options), input)
 })
 
-test('rewrites a repo path link to the pinned tag', () => {
+test('rewrites a repo path link to the pinned commit', () => {
   const input = 'See [watch](../../examples/python/md_watch/md_watch.py).\n'
   assert.equal(
     rewriteMarkdown(input, options),
-    'See [watch](https://github.com/lynxlinkage/mftik/blob/v1.0.0/examples/python/md_watch/md_watch.py).\n',
+    `See [watch](https://github.com/lynxlinkage/mftik/blob/${ref}/examples/python/md_watch/md_watch.py).\n`,
   )
 })
 
@@ -41,7 +42,7 @@ test('turns a citation fence into a blob link and keeps the code', () => {
     [
       'Intro',
       '',
-      '[examples/python/md_watch/md_watch.py:2-3](https://github.com/lynxlinkage/mftik/blob/v1.0.0/examples/python/md_watch/md_watch.py#L2-L3)',
+      `[examples/python/md_watch/md_watch.py:2-3](https://github.com/lynxlinkage/mftik/blob/${ref}/examples/python/md_watch/md_watch.py#L2-L3)`,
       '',
       '```python',
       'def on_init(self):',

@@ -11,6 +11,7 @@ docs/.vitepress/cache/
 /docs/threads.md
 /docs/volume.md
 /docs/pack.md
+/docs/session.md
 /docs/errors.md
 /docs/runtime.md
 /docs/examples.md

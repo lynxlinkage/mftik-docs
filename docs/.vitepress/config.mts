@@ -9,7 +9,8 @@ const repoUrl = `https://github.com/${source.repo}`
 
 export default defineConfig({
   title: 'mftik',
-  description: 'Python STS SDK for mftiko',
+  titleTemplate: `:title | ${source.version}`,
+  description: `${source.version} Python STS SDK for mftiko`,
   lang: 'en-US',
   cleanUrls: true,
   appearance: 'dark',
@@ -32,7 +33,7 @@ export default defineConfig({
     // keeps only the first of those links, which would skip Examples.
     docFooter: { prev: false, next: false },
     footer: {
-      message: `mftik <a href="${repoUrl}/tree/${source.tag}">${source.tag}</a>`,
+      message: `mftik <a href="${repoUrl}/tree/${source.commit}">${source.version}</a>`,
       copyright: 'Copyright © lynxlinkage',
     },
   },

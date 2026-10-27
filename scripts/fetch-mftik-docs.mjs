@@ -13,8 +13,11 @@ export function loadSource() {
   if (!/^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/.test(source.repo)) {
     throw new Error('mftik-source.json repo must be owner/name')
   }
-  if (!/^v\d+\.\d+\.\d+$/.test(source.tag)) {
-    throw new Error('mftik-source.json tag must look like v1.2.3')
+  if (!/^v\d+\.\d+\.\d+$/.test(source.version)) {
+    throw new Error('mftik-source.json version must look like v1.2.3')
+  }
+  if (source.tag != null) {
+    throw new Error('mftik-source.json must pin a commit, not a tag')
   }
   if (!/^[0-9a-f]{40}$/.test(source.commit)) {
     throw new Error('mftik-source.json commit must be a 40-character sha')
@@ -28,25 +31,16 @@ export function loadSource() {
 export function fetchMftikDocs(source = loadSource()) {
   const dir = mkdtempSync(join(tmpdir(), 'mftik-docs-'))
   try {
-    git([
-      '-c',
-      'advice.detachedHead=false',
-      'clone',
-      '--quiet',
-      '--depth',
-      '1',
-      '--filter=blob:none',
-      '--sparse',
-      '--branch',
-      source.tag,
-      `https://github.com/${source.repo}.git`,
-      dir,
-    ])
+    git(['init', '--quiet'], dir)
+    git(['remote', 'add', 'origin', `https://github.com/${source.repo}.git`], dir)
+    git(['sparse-checkout', 'init', '--cone'], dir)
+    git(['sparse-checkout', 'set', 'docs/python'], dir)
+    git(['fetch', '--depth', '1', '--filter=blob:none', 'origin', source.commit], dir)
+    git(['-c', 'advice.detachedHead=false', 'checkout', '--quiet', 'FETCH_HEAD'], dir)
     const head = git(['rev-parse', 'HEAD'], dir).trim()
     if (head !== source.commit) {
-      throw new Error(`tag ${source.tag} resolved to ${head}, config pins ${source.commit}`)
+      throw new Error(`fetched ${head}, config pins ${source.commit}`)
     }
-    git(['sparse-checkout', 'set', 'docs/python'], dir)
 
     const docsPython = join(dir, 'docs', 'python')
     const entries = readdirSync(docsPython, { withFileTypes: true })
@@ -73,7 +67,7 @@ export function fetchMftikDocs(source = loadSource()) {
       try {
         rewritten = rewriteMarkdown(body, {
           repo: source.repo,
-          tag: source.tag,
+          ref: source.commit,
           pages: source.pages,
         })
       } catch (err) {
@@ -86,7 +80,7 @@ export function fetchMftikDocs(source = loadSource()) {
     if (!/^## md_watch$/m.test(examples)) {
       throw new Error('examples.md has no "## md_watch" heading for the First strategy link')
     }
-    console.log(`fetched ${source.repo} docs/python at ${source.tag} (${source.commit})`)
+    console.log(`fetched ${source.repo} docs/python at ${source.commit} (${source.version} docs)`)
   } finally {
     rmSync(dir, { recursive: true, force: true })
   }

@@ -4,7 +4,7 @@ const fenceOpen = /^(?<indent> {0,3})```(?<info>.*)$/
 const fenceClose = /^ {0,3}```[ \t]*$/
 const inlineLink = /(!?)\[([^\]]*)\]\(([^)\s]+)(\s+"[^"]*")?\)/g
 
-export function blobUrl(repo, tag, repoPath, start, end) {
+export function blobUrl(repo, ref, repoPath, start, end) {
   const parts = repo.split('/')
   if (parts.length !== 2 || parts.some((part) => part.length === 0)) {
     throw new Error('repo must be owner/name')
@@ -12,14 +12,14 @@ export function blobUrl(repo, tag, repoPath, start, end) {
   assertRepoPath(repoPath)
   const [owner, name] = parts
   const encodedPath = repoPath.split('/').map(encodeURIComponent).join('/')
-  let url = `https://github.com/${owner}/${name}/blob/${encodeURIComponent(tag)}/${encodedPath}`
+  let url = `https://github.com/${owner}/${name}/blob/${encodeURIComponent(ref)}/${encodedPath}`
   if (start != null) {
     url += end != null && Number(end) !== Number(start) ? `#L${start}-L${end}` : `#L${start}`
   }
   return url
 }
 
-export function rewriteMarkdown(markdown, { repo, tag, pages }) {
+export function rewriteMarkdown(markdown, { repo, ref, pages }) {
   if (!Array.isArray(pages)) throw new Error('pages must be a list')
   const normalized = markdown.replace(/\r\n/g, '\n')
   const endsWithNewline = normalized.endsWith('\n')
@@ -46,7 +46,7 @@ export function rewriteMarkdown(markdown, { repo, tag, pages }) {
       assertRepoPath(path)
       if (output.length > 0 && output[output.length - 1] !== '') output.push('')
       const label = `${path}:${start}-${end}`
-      output.push(`${indent}[${label}](${blobUrl(repo, tag, path, startLine, endLine)})`)
+      output.push(`${indent}[${label}](${blobUrl(repo, ref, path, startLine, endLine)})`)
       output.push('')
       output.push(`${indent}\`\`\`${lang}`)
       inFence = true
@@ -59,7 +59,7 @@ export function rewriteMarkdown(markdown, { repo, tag, pages }) {
       continue
     }
 
-    output.push(rewriteInlineLinks(line, { repo, tag, pages }))
+    output.push(rewriteInlineLinks(line, { repo, ref, pages }))
   }
   if (inFence) throw new Error('unclosed code fence')
 
@@ -80,7 +80,7 @@ function rewriteInlineLinks(line, options) {
   })
 }
 
-function rewriteDestination(dest, { repo, tag, pages }) {
+function rewriteDestination(dest, { repo, ref, pages }) {
   if (/^[a-z][a-z0-9+.-]*:/i.test(dest) || dest.startsWith('#') || dest.startsWith('/')) {
     return null
   }
@@ -91,7 +91,7 @@ function rewriteDestination(dest, { repo, tag, pages }) {
   if (path === '' || isPublishedPage(path, pages)) return null
   const repoPath = repoPathFromLink(path)
   if (!repoPath) throw new Error(`unsupported relative link: ${dest}`)
-  return blobUrl(repo, tag, repoPath) + hash
+  return blobUrl(repo, ref, repoPath) + hash
 }
 
 function isPublishedPage(path, pages) {

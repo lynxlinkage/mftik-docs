@@ -20,10 +20,11 @@ const removed = [
   'sessions.md',
 ]
 
-test('pins the published mftik tag', () => {
+test('pins the mftik commit and labels the site v1.0.0', () => {
   assert.equal(source.repo, 'lynxlinkage/mftik')
-  assert.equal(source.tag, 'v1.0.0')
-  assert.equal(source.commit, '4434af2ef0309d7eeb7c7e8c42811d6907da0c75')
+  assert.equal(source.version, 'v1.0.0')
+  assert.equal(source.commit, '8af69f5ec99a5277c8542e8aac5e0d4799b906c0')
+  assert.equal(source.tag, undefined)
   assert.equal(source.mftiko, 'https://github.com/BullionBear/mftiko')
 })
 
@@ -38,6 +39,7 @@ test('sidebar is Getting Started, Guides, and API Reference', () => {
   )
   assert.equal(source.sidebar[0].items[1].link, `/examples#${slugifyHeading('md_watch')}`)
   const guides = source.sidebar[1].items.map((item) => item.link)
+  assert.equal(guides[guides.indexOf('/pack') + 1], '/session')
   assert.deepEqual(guides.slice(-2), ['/runtime', '/examples'])
   assert.deepEqual(source.sidebar[2].items, [{ text: 'API reference', link: '/reference' }])
 
@@ -48,6 +50,7 @@ test('sidebar is Getting Started, Guides, and API Reference', () => {
 test('homepage states the SDK role and repeats the sidebar', () => {
   const index = readFileSync(join(root, 'docs/index.md'), 'utf8')
   assert.match(index, /mftik is the Python STS SDK for \[mftiko\]\(https:\/\/github\.com\/BullionBear\/mftiko\)\./)
+  assert.ok(index.includes(`${source.version} guide`))
   for (const group of source.sidebar) {
     assert.match(index, new RegExp(`^## ${group.text}$`, 'm'))
     for (const item of group.items) {
