@@ -29,6 +29,7 @@
       "items": [
         { "text": "Lifecycle", "link": "/lifecycle" },
         { "text": "Context", "link": "/context" },
+        { "text": "Logging", "link": "/log" },
         { "text": "Threads", "link": "/threads" },
         { "text": "Volume and inputs", "link": "/volume" },
         { "text": "Pack and deploy", "link": "/pack" },

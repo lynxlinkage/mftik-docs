@@ -9,6 +9,9 @@ import { slugifyHeading } from './slugify-heading.mjs'
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 const source = JSON.parse(readFileSync(join(root, 'mftik-source.json'), 'utf8'))
 
+// Written in this repo. The other sidebar pages are fetched from mftik.
+const handWritten = ['log']
+
 const removed = [
   'quick-start.md',
   'cli.md',
@@ -39,12 +42,13 @@ test('sidebar is Getting Started, Guides, and API Reference', () => {
   )
   assert.equal(source.sidebar[0].items[1].link, `/examples#${slugifyHeading('md_watch')}`)
   const guides = source.sidebar[1].items.map((item) => item.link)
+  assert.equal(guides[guides.indexOf('/context') + 1], '/log')
   assert.equal(guides[guides.indexOf('/pack') + 1], '/session')
   assert.deepEqual(guides.slice(-2), ['/runtime', '/examples'])
   assert.deepEqual(source.sidebar[2].items, [{ text: 'API reference', link: '/reference' }])
 
   const linked = source.sidebar.flatMap((group) => group.items.map((item) => item.link.split('#')[0].slice(1)))
-  assert.deepEqual([...new Set(linked)].sort(), [...source.pages].sort())
+  assert.deepEqual([...new Set(linked)].sort(), [...source.pages, ...handWritten].sort())
 })
 
 test('homepage states the SDK role and repeats the sidebar', () => {
@@ -72,6 +76,29 @@ test('old pages are gone and fetched pages are not committed as source', () => {
     execFileSync('git', ['check-ignore', '-q', `docs/${page}.md`], { cwd: root })
   }
   assert.throws(() => execFileSync('git', ['check-ignore', '-q', 'docs/index.md'], { cwd: root, stdio: 'ignore' }))
+})
+
+test('hand-written pages are committed and are not fetched', () => {
+  for (const page of handWritten) {
+    assert.equal(source.pages.includes(page), false, page)
+    assert.equal(existsSync(join(root, 'docs', `${page}.md`)), true, page)
+    assert.throws(() => execFileSync('git', ['check-ignore', '-q', `docs/${page}.md`], { cwd: root, stdio: 'ignore' }))
+  }
+})
+
+test('the Logging page links mftik at the pinned commit', () => {
+  const page = readFileSync(join(root, 'docs/log.md'), 'utf8')
+  const refs = [...page.matchAll(/https:\/\/github\.com\/lynxlinkage\/mftik\/(?:blob|tree)\/([^/]+)\//g)].map(
+    (match) => match[1],
+  )
+  assert.ok(refs.length > 0)
+  assert.deepEqual([...new Set(refs)], [source.commit])
+})
+
+test('the Logging page shows sdk_version as a placeholder', () => {
+  const page = readFileSync(join(root, 'docs/log.md'), 'utf8')
+  assert.ok(page.includes(`${source.version.slice(1)}+<40-hex sha>`))
+  assert.doesNotMatch(page, /\+[0-9a-f]{40}/)
 })
 
 test('GitHub Pages deploy still publishes the VitePress dist', () => {

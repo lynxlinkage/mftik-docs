@@ -6,6 +6,8 @@ This repository is the VitePress shell. The guide and API reference are fetched 
 
 The homepage in this repo is the shell index. `docs/python/README.md` from mftik is not published.
 
+The Logging page, `docs/log.md`, is written in this repo because `docs/python` has no page for it. It was checked against mftik at the pinned commit, and its GitHub links use that sha. When the pin moves, `npm test` fails until the page is checked again and its links and `sdk_version` examples are updated.
+
 ```bash
 npm install
 npm test

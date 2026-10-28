@@ -17,6 +17,7 @@ These pages are the v1.1.0 guide and API reference. A session worker is a proces
 
 - [Lifecycle](/lifecycle)
 - [Context](/context)
+- [Logging](/log)
 - [Threads](/threads)
 - [Volume and inputs](/volume)
 - [Pack and deploy](/pack)
