@@ -2,7 +2,7 @@ import assert from 'node:assert/strict'
 import test from 'node:test'
 import { rewriteMarkdown } from './rewrite-mftik-markdown.mjs'
 
-const ref = '8af69f5ec99a5277c8542e8aac5e0d4799b906c0'
+const ref = '876e1ae0354acf497c4b5a203d9f48c8da970069'
 const options = {
   repo: 'lynxlinkage/mftik',
   ref,

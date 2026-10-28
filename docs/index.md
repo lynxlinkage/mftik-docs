@@ -1,12 +1,12 @@
 ---
-description: v1.0.0 Python STS SDK for mftiko
+description: v1.1.0 Python STS SDK for mftiko
 ---
 
 # mftik
 
 mftik is the Python STS SDK for [mftiko](https://github.com/BullionBear/mftiko).
 
-These pages are the v1.0.0 guide and API reference. A session worker is a process started with `python -m mftik.run module:Class`.
+These pages are the v1.1.0 guide and API reference. A session worker is a process started with `python -m mftik.run module:Class`.
 
 ## Getting Started
 
@@ -17,6 +17,7 @@ These pages are the v1.0.0 guide and API reference. A session worker is a proces
 
 - [Lifecycle](/lifecycle)
 - [Context](/context)
+- [Logging](/log)
 - [Threads](/threads)
 - [Volume and inputs](/volume)
 - [Pack and deploy](/pack)
