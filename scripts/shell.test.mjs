@@ -20,10 +20,10 @@ const removed = [
   'sessions.md',
 ]
 
-test('pins the mftik commit and labels the site v1.0.0', () => {
+test('pins the mftik commit and labels the site v1.1.0', () => {
   assert.equal(source.repo, 'lynxlinkage/mftik')
-  assert.equal(source.version, 'v1.0.0')
-  assert.equal(source.commit, '8af69f5ec99a5277c8542e8aac5e0d4799b906c0')
+  assert.equal(source.version, 'v1.1.0')
+  assert.equal(source.commit, '876e1ae0354acf497c4b5a203d9f48c8da970069')
   assert.equal(source.tag, undefined)
   assert.equal(source.mftiko, 'https://github.com/BullionBear/mftiko')
 })

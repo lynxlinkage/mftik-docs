@@ -1,7 +1,7 @@
 {
   "repo": "lynxlinkage/mftik",
-  "version": "v1.0.0",
-  "commit": "8af69f5ec99a5277c8542e8aac5e0d4799b906c0",
+  "version": "v1.1.0",
+  "commit": "876e1ae0354acf497c4b5a203d9f48c8da970069",
   "mftiko": "https://github.com/BullionBear/mftiko",
   "pages": [
     "install",

@@ -2,7 +2,7 @@
 
 Docs for [mftik](https://github.com/lynxlinkage/mftik), the Python STS SDK for [mftiko](https://github.com/BullionBear/mftiko), published at [docs.mftik.com](https://docs.mftik.com).
 
-This repository is the VitePress shell. The guide and API reference are fetched from `docs/python` in lynxlinkage/mftik at the full commit sha in `mftik-source.json`. The site is the v1.0.0 docs. Bump the pin by editing that file.
+This repository is the VitePress shell. The guide and API reference are fetched from `docs/python` in lynxlinkage/mftik at the full commit sha in `mftik-source.json`. The site is the v1.1.0 docs. Bump the pin by editing that file.
 
 The homepage in this repo is the shell index. `docs/python/README.md` from mftik is not published.
 
